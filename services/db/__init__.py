@@ -1,7 +1,7 @@
 import pathlib
 
 import asyncpg
-# import yaml
+import yaml
 
 
 DSN = "{RDBMS}://{user}@{host}/{database}"
@@ -29,15 +29,7 @@ async def exec_fetch(pool, query):
 async def get_pool():
     # SETUP REQUESTS POOL
 
-    # config = get_config(config_path)
-    config = {'postgres': {
-          'RDBMS': 'postgresql',
-          'database': 'manager_task_db',
-          'user': 'nikita',
-          'password': '',
-          'host': 'localhost',
-          'port': ''}
-    }
+    config = get_config(config_path)
 
     pool = await asyncpg.create_pool(DSN.format(**config['postgres']))
     return pool
